@@ -14,6 +14,7 @@ public class NinjaModel {
     private int age;
 
     public NinjaModel() {
+
     }
 
     public NinjaModel(String name, String email, int age) {
