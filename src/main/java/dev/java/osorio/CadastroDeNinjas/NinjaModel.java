@@ -2,8 +2,6 @@ package dev.java.osorio.CadastroDeNinjas;
 
 import jakarta.persistence.*;
 
-import java.util.UUID;
-
 @Entity
 @Table(name = "tb_cadastro")
 public class NinjaModel {
@@ -23,6 +21,7 @@ public class NinjaModel {
         this.email = email;
         this.age = age;
     }
+
 
     public Long getId() {
         return id;
