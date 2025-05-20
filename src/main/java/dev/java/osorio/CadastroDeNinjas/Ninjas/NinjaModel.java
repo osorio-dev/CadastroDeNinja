@@ -1,5 +1,6 @@
-package dev.java.osorio.CadastroDeNinjas;
+package dev.java.osorio.CadastroDeNinjas.Ninjas;
 
+import dev.java.osorio.CadastroDeNinjas.Missoes.MissoesModel;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,8 +14,12 @@ public class NinjaModel {
     private String email;
     private int age;
 
-    public NinjaModel() {
+    //Anotação para que um ninja apenas tenha uma unica missao
+    @ManyToOne
+    @JoinColumn(name = "missao_id") // Foreing Key == Chave Estrangeira
+    private MissoesModel missao;
 
+    public NinjaModel() {
     }
 
     public NinjaModel(String name, String email, int age) {
