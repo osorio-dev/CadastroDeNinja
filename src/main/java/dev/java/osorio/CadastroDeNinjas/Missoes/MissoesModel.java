@@ -2,11 +2,17 @@ package dev.java.osorio.CadastroDeNinjas.Missoes;
 
 import dev.java.osorio.CadastroDeNinjas.Ninjas.NinjaModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "tb_missoes")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MissoesModel {
 
     @Id
@@ -18,32 +24,4 @@ public class MissoesModel {
     // Anotação para que a missao receba varios ninjas
     @OneToMany(mappedBy = "missao")
     private List<NinjaModel> listNinja;
-
-    public MissoesModel() {
-    }
-
-    public MissoesModel(String name, MissionRanks difficulty) {
-        this.name = name;
-        this.difficulty = difficulty;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public MissionRanks getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(MissionRanks difficulty) {
-        this.difficulty = difficulty;
-    }
 }
