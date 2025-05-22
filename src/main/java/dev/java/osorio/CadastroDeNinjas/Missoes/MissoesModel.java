@@ -18,7 +18,9 @@ public class MissoesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private MissionRanks difficulty;
 
     // Anotação para que a missao receba varios ninjas
