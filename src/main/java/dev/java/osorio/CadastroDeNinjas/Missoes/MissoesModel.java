@@ -21,7 +21,7 @@ public class MissoesModel {
 
     private String name;
 
-    private MissionRanks difficulty;
+    private String difficulty;
 
     // Anotação para que a missao receba varios ninjas
     @OneToMany(mappedBy = "missao")
