@@ -3,7 +3,7 @@ package dev.java.osorio.CadastroDeNinjas.Missoes;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("mission") // Sub-Dominio
+@RequestMapping("/mission") // Sub-Dominio
 public class MissoesController {
 
     //Adicionar Missão (CREATE)

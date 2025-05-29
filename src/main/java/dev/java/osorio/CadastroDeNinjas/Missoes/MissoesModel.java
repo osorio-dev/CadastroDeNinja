@@ -1,5 +1,6 @@
 package dev.java.osorio.CadastroDeNinjas.Missoes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java.osorio.CadastroDeNinjas.Ninjas.NinjaModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,5 +26,6 @@ public class MissoesModel {
 
     // Anotação para que a missao receba varios ninjas
     @OneToMany(mappedBy = "missao")
+    @JsonIgnore // Interrompe o looping de serialização
     private List<NinjaModel> listNinja;
 }
