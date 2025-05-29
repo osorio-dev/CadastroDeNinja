@@ -1,5 +1,6 @@
 package dev.java.osorio.CadastroDeNinjas.Ninjas;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java.osorio.CadastroDeNinjas.Missoes.MissoesModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
