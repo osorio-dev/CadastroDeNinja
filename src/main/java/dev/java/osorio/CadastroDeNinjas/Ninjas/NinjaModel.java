@@ -26,6 +26,8 @@ public class NinjaModel {
     @Column(name = "img_url")
     private String imgUrl;
 
+    private String rank;
+
     private int age;
 
     //Anotação para que um ninja apenas tenha uma unica missao

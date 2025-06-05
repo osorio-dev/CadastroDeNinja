@@ -2,34 +2,43 @@ package dev.java.osorio.CadastroDeNinjas.Ninjas;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class NinjaService {
 
     // @Autowired annotation para injetar dependencia
     private NinjaRepository ninjaRepository;
+    private NinjaMapper ninjaMapper;
 
-    public NinjaService(NinjaRepository ninjaRepository) {
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
     }
 
     //Listar todos os ninjas cadastrados
-    public List<NinjaModel> getAllNinjas() {
-        return ninjaRepository.findAll();
+    public List<NinjaDTO> getAllNinjas() {
+        List<NinjaModel> ninjaModelList = ninjaRepository.findAll();
+
+        return ninjaModelList.stream()
+                .map(ninjaMapper::map)
+                .collect(Collectors.toList());
     }
 
     //Pegar Ninja por ID
-    public NinjaModel getNinjaById(Long id) {
-        Optional<NinjaModel> ninjaById = ninjaRepository.findById(id);
-        return ninjaById.orElse(null);
+    public NinjaDTO getNinjaById(Long id) {
+        Optional<NinjaModel> ninjaModelById = ninjaRepository.findById(id);
+        return ninjaModelById.map(ninjaMapper::map).orElse(null);
+
     }
 
     //Criar Ninja
-    public NinjaModel createNinja(NinjaModel ninja) {
-        return ninjaRepository.save(ninja);
+    public NinjaDTO createNinja(NinjaDTO ninjaDTO) {
+        NinjaModel ninjaModel = ninjaMapper.map(ninjaDTO);
+        ninjaModel = ninjaRepository.save(ninjaModel);
+        return ninjaMapper.map(ninjaModel);
     }
 
     //Deletar ninja
@@ -38,12 +47,17 @@ public class NinjaService {
     }
 
     //Atualizar um Ninja
-    public NinjaModel updateNinja(Long id, NinjaModel ninjaModel) {
-        NinjaModel ninja = getNinjaById(id);
+    public NinjaDTO updateNinja(Long id, NinjaDTO ninjaDTO) {
+        Optional<NinjaModel> ninjaModel = ninjaRepository.findById(id);
 
-        ninjaModel.setId(ninja.getId());
+        //Condição pra saber se existe ou não o ID com (Fail Fast)
+        if (ninjaModel.isEmpty()) {
+            return null;
+        }
 
-        return createNinja(ninjaModel);
+        ninjaDTO.setId(id);
+
+        return createNinja(ninjaDTO);
     }
 
 }
